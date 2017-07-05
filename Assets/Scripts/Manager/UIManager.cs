@@ -8,12 +8,13 @@ public class UIManager : MonoBehaviour {
 
 	void Awake()
 	{
-		GameController.controller.uiManager = this;
 	}
 
 	void Start()
 	{
+		GameController.controller.uiManager = this;
 		LoadReferences ();
+		AddEscDelegate ();
 	}
 
 	/// <summary>
@@ -31,4 +32,15 @@ public class UIManager : MonoBehaviour {
 	{
 		mainMenu.SetActive (true);
 	}
+
+	void AddEscDelegate()
+	{
+		//GameController.controller.inputManager.AddEscDelegate (this.OnPressEsc);
+	}
+
+	void OnPressEsc()
+	{
+		mainMenu.SetActive (true);
+	}
+
 }

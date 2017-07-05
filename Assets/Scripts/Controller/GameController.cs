@@ -9,6 +9,9 @@ public class GameController : MonoBehaviour {
 	[HideInInspector]
 	public UIManager uiManager;
 
+	[HideInInspector]
+	public InputManager inputManager;
+
 	void Awake()
 	{
 		controller = this;

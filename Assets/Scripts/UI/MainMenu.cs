@@ -20,6 +20,16 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Raises the enable event.
+	/// Play open animation 
+	/// </summary>
+	void OnEnable()
+	{
+		if(anim != null)
+			 anim.SetBool ("open", true);
+	}
+
+	/// <summary>
 	/// Loads the references.
 	/// </summary>
 	void LoadReferences()
