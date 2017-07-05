@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 2e029261a7e793f408cd32675ab3f87e
+timeCreated: 1499236392
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -1
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Railroader
+  fontNames:
+  - Railroader
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 3
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
