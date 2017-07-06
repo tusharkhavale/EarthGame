@@ -12,10 +12,12 @@ public class GameController : MonoBehaviour {
 	[HideInInspector]
 	public InputManager inputManager;
 
+	[HideInInspector]
+	public EarthManager earthManager;
+
 	void Awake()
 	{
 		controller = this;
 	}
-
 
 }

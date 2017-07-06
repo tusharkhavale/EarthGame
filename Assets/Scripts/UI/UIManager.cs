@@ -5,14 +5,15 @@ using UnityEngine;
 public class UIManager : MonoBehaviour {
 
 	private GameObject mainMenu;
+	private GameObject wikiPage;
 
 	void Awake()
 	{
+		GameController.controller.uiManager = this;
 	}
 
 	void Start()
 	{
-		GameController.controller.uiManager = this;
 		LoadReferences ();
 		AddEscDelegate ();
 	}
@@ -23,6 +24,7 @@ public class UIManager : MonoBehaviour {
 	void LoadReferences()
 	{
 		mainMenu = transform.Find ("MainMenu").gameObject;
+		wikiPage = transform.Find ("WikiPage").gameObject;
 	}
 
 	/// <summary>
@@ -35,7 +37,7 @@ public class UIManager : MonoBehaviour {
 
 	void AddEscDelegate()
 	{
-		//GameController.controller.inputManager.AddEscDelegate (this.OnPressEsc);
+		GameController.controller.inputManager.AddEscDelegate (this.OnPressEsc);
 	}
 
 	void OnPressEsc()
