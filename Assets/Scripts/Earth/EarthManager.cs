@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class EarthManager : MonoBehaviour {
 
-	Transform earth;
-	GameObject selectedCountry;
+	private Transform earth;
+	private GameObject selectedCountry;
+	private Animator anim;
 
 	void Awake()
 	{
 		GameController.controller.earthManager = this;
+		LoadReferences ();
 	}
 
 	/// <summary>
@@ -18,6 +20,7 @@ public class EarthManager : MonoBehaviour {
 	private void LoadReferences()
 	{
 		earth = transform.Find ("EarthCountries");
+		anim = transform.GetComponent<Animator> ();
 	}
 
 	/// <summary>
@@ -29,6 +32,7 @@ public class EarthManager : MonoBehaviour {
 		set{
 				HideCountry ();
 				selectedCountry = value;
+				MoveToWikiPosition (true);
 		   }
 		get{ return selectedCountry; }
 	}
@@ -41,6 +45,18 @@ public class EarthManager : MonoBehaviour {
 	{
 		if(SelectedCountry)
 			SelectedCountry.transform.GetComponent<MeshRenderer> ().enabled = false;
+		
 	}
+
+	/// <summary>
+	/// Moves globe to wiki position.
+	/// </summary>
+	/// <param name="value">If set to <c>true</c> value.</param>
+	public void MoveToWikiPosition(bool value)
+	{
+		anim.SetBool ("wikiPos", value);
+		GameController.controller.ShowWikiPanel ();
+	}
+
 
 }

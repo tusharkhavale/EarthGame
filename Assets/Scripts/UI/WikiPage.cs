@@ -6,12 +6,25 @@ using UnityEngine.UI;
 public class WikiPage : MonoBehaviour {
 
 	private Text txtContent;
+	private Animator anim;
+
+	void Start()
+	{
+		LoadReferences ();
+	}
+
+	void OnEnable()
+	{
+		if (anim)
+			anim.SetBool ("zoomOut", false);
+	}
 
 	/// <summary>
 	/// Loads all references.
 	/// </summary>
 	void LoadReferences()
 	{
+		anim = transform.GetComponent<Animator> ();
 		txtContent = transform.Find ("Bg").Find ("TextScroll").Find ("Viewport").GetComponentInChildren<Text> ();
 	}
 
@@ -25,4 +38,13 @@ public class WikiPage : MonoBehaviour {
 		get{return txtContent.text;}
 	}
 
+	public void ZoomOut()
+	{
+		anim.SetBool ("zoomOut", true);
+	}
+
+	private void HideWikiPanel()
+	{
+		gameObject.SetActive (false);
+	}
 }

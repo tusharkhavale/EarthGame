@@ -100,7 +100,7 @@ public class InputManager : MonoBehaviour {
 	{
 		// Cheat after crash
 		if (Input.GetKey (KeyCode.W) && Input.GetKey (KeyCode.D) && Input.GetKey (KeyCode.A))
-	    	cheatEvent ();
+			cheatEvent ();
 
 		if (Input.GetKey(KeyCode.W) || Input.GetKey (KeyCode.UpArrow)) 			// Up
 			upEvent ();

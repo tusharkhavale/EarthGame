@@ -20,4 +20,9 @@ public class GameController : MonoBehaviour {
 		controller = this;
 	}
 
+	public void ShowWikiPanel()
+	{
+		uiManager.ShowWikiPanel ();
+	}
+
 }

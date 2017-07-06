@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour {
 
 	private GameObject mainMenu;
-	private GameObject wikiPage;
+	private GameObject wikiPanel;
 
 	void Awake()
 	{
@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour {
 	void LoadReferences()
 	{
 		mainMenu = transform.Find ("MainMenu").gameObject;
-		wikiPage = transform.Find ("WikiPage").gameObject;
+		wikiPanel = transform.Find ("WikiPage").gameObject;
 	}
 
 	/// <summary>
@@ -42,7 +42,38 @@ public class UIManager : MonoBehaviour {
 
 	void OnPressEsc()
 	{
-		mainMenu.SetActive (true);
+//		mainMenu.SetActive (true);
+		wikiPanel.transform.GetComponent<WikiPage> ().ZoomOut ();
+		GameController.controller.earthManager.MoveToWikiPosition (false);
+	}
+
+	public void ShowWikiPanel()
+	{
+		wikiPanel.SetActive (true);
+		StartCoroutine (GetData ());
+	}
+
+
+	string url = "https://en.wikipedia.org/w/api.php";
+	string country;
+	IEnumerator GetData()
+	{
+		country = GameController.controller.earthManager.SelectedCountry.name;
+		WWWForm form = new WWWForm ();
+		form.AddField ("action", "query");
+		form.AddField ("prop", "revisions");
+		form.AddField ("titles", country);
+		form.AddField ("rvprop", "content");
+
+		WWW w = new WWW(url, form);
+		yield return w;
+		if (!string.IsNullOrEmpty(w.error)) {
+			print(w.error);
+		}
+		else {
+			wikiPanel.transform.GetComponent<WikiPage> ().Content = w.text.Substring (0, 1000);
+			print("Done : "+w.text);
+		}
 	}
 
 }

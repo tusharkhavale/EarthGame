@@ -21,6 +21,8 @@ public class InputHandler : MonoBehaviour {
 	{
 
 #if UNITY_WEBGL || UNITY_WEBGL_API
+
+	
 		// Mouse wheel scroll 
 		if (Input.GetAxis ("Mouse ScrollWheel") != 0)
 			OnMouseScroll (Input.GetAxis ("Mouse ScrollWheel"));
@@ -36,24 +38,34 @@ public class InputHandler : MonoBehaviour {
 
 		if(mouseDown)
 		{
-			float x = Input.GetAxis ("Mouse X") * rotateFactor/10 ;
+			float x = Input.GetAxis ("Mouse X") * rotateFactor ;
 			float y = Input.GetAxis ("Mouse Y") * rotateFactor ;
 
-			transform.RotateAround (Vector3.up, -x);
+//			transform.RotateAround (Vector3.up, -x);
+			Quaternion rotation1 = transform.localRotation;
+			float tempX1 = rotation1.eulerAngles.y - x;
+			Vector3 newRotation1 = new Vector3(0f,tempX1,0f);
+			rotation1.eulerAngles = newRotation1;
+			transform.localRotation = rotation1;	
 
-			Quaternion rotation = transform.rotation;
-			float tempX = rotation.eulerAngles.x - y;
-
+			Quaternion rotation = transform.parent.rotation;
+			float tempX = rotation.eulerAngles.x + y;
+		
 			if(tempX > 30 && tempX < 200)
 				tempX = 30;
 			else if(tempX > 200 && tempX < 330)
 				tempX = 330;
 
 
-			Vector3 newRotation = new Vector3(tempX,(rotation.eulerAngles.y + x),rotation.eulerAngles.z);
+			Vector3 newRotation = new Vector3(tempX,0f,0f);
 			rotation.eulerAngles = newRotation;
-			transform.rotation = rotation;
+			transform.parent.rotation = rotation;	
+
+
 		}
+		else
+			transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation,Quaternion.Euler(Vector3.zero),0.01f);
+		
 		#else
 
 
