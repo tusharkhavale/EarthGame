@@ -16,7 +16,7 @@ public class WikiPage : MonoBehaviour {
 	void OnEnable()
 	{
 		if (anim)
-			anim.SetBool ("zoomOut", false);
+			ZoomOut(false);
 	}
 
 	/// <summary>
@@ -38,11 +38,17 @@ public class WikiPage : MonoBehaviour {
 		get{return txtContent.text;}
 	}
 
-	public void ZoomOut()
+	/// <summary>
+	/// Zooms out earth.
+	/// </summary>
+	public void ZoomOut(bool value)
 	{
-		anim.SetBool ("zoomOut", true);
+		anim.SetBool ("zoomOut", value);
 	}
 
+	/// <summary>
+	/// Hides the wiki panel when zoom out animation finishes.
+	/// </summary>
 	private void HideWikiPanel()
 	{
 		gameObject.SetActive (false);

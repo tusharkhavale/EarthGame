@@ -32,7 +32,7 @@ public class EarthManager : MonoBehaviour {
 		set{
 				HideCountry ();
 				selectedCountry = value;
-				MoveToWikiPosition (true);
+				GameController.controller.ShowCountryTitle ();
 		   }
 		get{ return selectedCountry; }
 	}
@@ -54,8 +54,18 @@ public class EarthManager : MonoBehaviour {
 	/// <param name="value">If set to <c>true</c> value.</param>
 	public void MoveToWikiPosition(bool value)
 	{
+		if (value)
+			anim.enabled = value;
 		anim.SetBool ("wikiPos", value);
-		GameController.controller.ShowWikiPanel ();
+
+	}
+
+	/// <summary>
+	/// Disable the Animator component when animation finishes
+	/// </summary>
+	public void DisabaleAnimation()
+	{
+		anim.enabled = false;
 	}
 
 

@@ -15,14 +15,45 @@ public class GameController : MonoBehaviour {
 	[HideInInspector]
 	public EarthManager earthManager;
 
+	[HideInInspector]
+	public NetworkManager networkManager;
+
+	[HideInInspector]
+	public Parser parser;
+
 	void Awake()
 	{
 		controller = this;
 	}
 
-	public void ShowWikiPanel()
+	public void MoveEarthToWikiPosition(bool value)
 	{
-		uiManager.ShowWikiPanel ();
+		earthManager.MoveToWikiPosition (value);
+	}
+
+	public void ShowCountryTitle()
+	{
+		uiManager.ShowCountryTitle ();
+	}
+
+	public void GetDataFromWikipedia()
+	{
+		networkManager.GetDataFromWikipedia ();
+	}
+
+	public string ParseJson(string json)
+	{
+		return parser.ParseJson (json);
+	}
+
+	public void AssignWikiText(string text)
+	{
+		uiManager.AssignWikiText (text);
+	}
+
+	public bool WikipediaStatus()
+	{
+		return uiManager.Wikipedia;
 	}
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour {
 
-	private float rotateFactor = 1f;
+	private float rotateFactor = 0.1f;
 	private bool mouseDown;
 	public float scaleFactor = 0.005f;
 	public float mouseZoomFactor = 0.05f;
@@ -20,9 +20,15 @@ public class InputHandler : MonoBehaviour {
 	void Update()
 	{
 
+		if (GameController.controller.WikipediaStatus ()) 
+		{
+			mouseDown = false;
+			return;
+		}
+
 #if UNITY_WEBGL || UNITY_WEBGL_API
 
-	
+
 		// Mouse wheel scroll 
 		if (Input.GetAxis ("Mouse ScrollWheel") != 0)
 			OnMouseScroll (Input.GetAxis ("Mouse ScrollWheel"));
@@ -41,30 +47,9 @@ public class InputHandler : MonoBehaviour {
 			float x = Input.GetAxis ("Mouse X") * rotateFactor ;
 			float y = Input.GetAxis ("Mouse Y") * rotateFactor ;
 
-//			transform.RotateAround (Vector3.up, -x);
-			Quaternion rotation1 = transform.localRotation;
-			float tempX1 = rotation1.eulerAngles.y - x;
-			Vector3 newRotation1 = new Vector3(0f,tempX1,0f);
-			rotation1.eulerAngles = newRotation1;
-			transform.localRotation = rotation1;	
-
-			Quaternion rotation = transform.parent.rotation;
-			float tempX = rotation.eulerAngles.x + y;
-		
-			if(tempX > 30 && tempX < 200)
-				tempX = 30;
-			else if(tempX > 200 && tempX < 330)
-				tempX = 330;
-
-
-			Vector3 newRotation = new Vector3(tempX,0f,0f);
-			rotation.eulerAngles = newRotation;
-			transform.parent.rotation = rotation;	
-
-
+			transform.RotateAround (Vector3.up, -x);
+			transform.RotateAround (Vector3.right, y);
 		}
-		else
-			transform.parent.rotation = Quaternion.Lerp(transform.parent.rotation,Quaternion.Euler(Vector3.zero),0.01f);
 		
 		#else
 
@@ -108,9 +93,14 @@ public class InputHandler : MonoBehaviour {
 	/// <param name="value">Value.</param>
 	void OnMouseScroll(float magnitude)
 	{
-		transform.localScale = new Vector3 (transform.localScale.x + magnitude*mouseZoomFactor, 
-			transform.localScale.y + magnitude*mouseZoomFactor,
-			transform.localScale.z + magnitude*mouseZoomFactor);
+		if (GameController.controller.WikipediaStatus())
+			return;
+		else
+			transform.GetComponent<EarthManager> ().DisabaleAnimation ();
+		
+			transform.localScale = new Vector3 (transform.localScale.x + magnitude*mouseZoomFactor, 
+												transform.localScale.y + magnitude*mouseZoomFactor,
+												transform.localScale.z + magnitude*mouseZoomFactor);
 	}
 
 #else
@@ -121,6 +111,11 @@ public class InputHandler : MonoBehaviour {
 	/// <param name="magnitude">Magnitude.</param>
 	void Zoom(float magnitude)
 	{
+	if (GameController.controller.WikipediaStatus())
+			return;
+		else
+			transform.GetComponent<EarthManager> ().DisabaleAnimation ();
+
 		transform.localScale = new Vector3 (transform.localScale.x - magnitude*scaleFactor, 
 		transform.localScale.y - magnitude*scaleFactor,
 		transform.localScale.z - magnitude*scaleFactor);
