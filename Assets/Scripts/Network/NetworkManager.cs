@@ -29,6 +29,7 @@ public class NetworkManager : MonoBehaviour {
 		country = GameController.controller.earthManager.SelectedCountry.name;
 		WWWForm form = new WWWForm ();
 		form.AddField ("action", "query");
+		form.AddField ("origin", "*");
 		form.AddField ("format", "json");
 		form.AddField ("prop", "extracts");
 		form.AddField ("exintro", "explaintext");
