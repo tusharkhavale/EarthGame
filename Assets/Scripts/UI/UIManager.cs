@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
 	private GameObject wikiPanel;
 	private GameObject header;
 	private Button btnInfo;
+	private Button btnClose;
 	private bool wikipedia;
 
 	void Awake()
@@ -32,6 +33,8 @@ public class UIManager : MonoBehaviour {
 		header = transform.Find ("Header").gameObject;
 		btnInfo = header.transform.GetComponentInChildren<Button> ();
 		btnInfo.onClick.AddListener (this.ShowWikiPanel);
+		btnClose = wikiPanel.transform.Find("Bg").GetComponentInChildren<Button> ();
+		btnClose.onClick.AddListener (this.HideWikiPanel);
 	}
 
 	/// <summary>
@@ -88,5 +91,7 @@ public class UIManager : MonoBehaviour {
 		header.SetActive(true);
 		header.transform.GetComponentInChildren<Text>().text = GameController.controller.earthManager.SelectedCountry.name;
 	}
+
+
 
 }
