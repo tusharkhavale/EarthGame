@@ -5,7 +5,7 @@ using UnityEngine;
 public class NetworkManager : MonoBehaviour {
 
 	private string url = "https://en.wikipedia.org/w/api.php";
-	private string country;
+	private string Country;
 
 	void Awake()
 	{
@@ -26,14 +26,14 @@ public class NetworkManager : MonoBehaviour {
 	/// <returns>The data.</returns>
 	IEnumerator GetData()
 	{
-		country = GameController.controller.earthManager.SelectedCountry.name;
+		Country = GameController.controller.earthManager.SelectedCountry.name;
 		WWWForm form = new WWWForm ();
 		form.AddField ("action", "query");
 		form.AddField ("origin", "*");
 		form.AddField ("format", "json");
 		form.AddField ("prop", "extracts");
 		form.AddField ("exintro", "explaintext");
-		form.AddField ("titles", country);
+		form.AddField ("titles", Country);
 
 		WWW w = new WWW(url, form);
 		yield return w;

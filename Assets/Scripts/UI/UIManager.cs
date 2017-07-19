@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
-	private GameObject mainMenu;
+	private OverlayUI overlayUI;
 	private GameObject wikiPanel;
 	private GameObject header;
 	private Button btnInfo;
@@ -28,7 +28,6 @@ public class UIManager : MonoBehaviour {
 	/// </summary>
 	void LoadReferences()
 	{
-		mainMenu = transform.Find ("MainMenu").gameObject;
 		wikiPanel = transform.Find ("WikiPage").gameObject;
 		header = transform.Find ("Header").gameObject;
 		btnInfo = header.transform.GetComponentInChildren<Button> ();
@@ -48,11 +47,12 @@ public class UIManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Shows Main Menu.
+	/// Assigns the overlay user interface refrence.
 	/// </summary>
-	public void ShowMenu ()
+	/// <param name="overlayUI">Overlay U.</param>
+	public void AssignOverlayUIRefrence(OverlayUI overlayUI)
 	{
-		mainMenu.SetActive (true);
+		this.overlayUI = overlayUI;
 	}
 
 	void AddEscDelegate()
@@ -62,7 +62,6 @@ public class UIManager : MonoBehaviour {
 
 	void OnPressEsc()
 	{
-//		mainMenu.SetActive (true);
 		HideWikiPanel();
 	}
 
@@ -91,7 +90,5 @@ public class UIManager : MonoBehaviour {
 		header.SetActive(true);
 		header.transform.GetComponentInChildren<Text>().text = GameController.controller.earthManager.SelectedCountry.name;
 	}
-
-
 
 }

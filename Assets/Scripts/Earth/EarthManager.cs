@@ -7,11 +7,18 @@ public class EarthManager : MonoBehaviour {
 	private Transform earth;
 	private GameObject selectedCountry;
 	private Animator anim;
+	public GameObject wikiPos;
 
 	void Awake()
 	{
 		GameController.controller.earthManager = this;
 		LoadReferences ();
+		string dummy = "";
+		for (int i = 0; i < transform.Find("EarthCountries").childCount; i++) 
+		{
+			dummy = dummy + transform.Find("EarthCountries").GetChild(i).name+",";
+		}
+		Debug.Log ("" + dummy);
 	}
 
 	/// <summary>
@@ -24,9 +31,9 @@ public class EarthManager : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Gets or sets the selected country.
+	/// Gets or sets the selected Country.
 	/// </summary>
-	/// <value>The selected country.</value>
+	/// <value>The selected Country.</value>
 	public GameObject SelectedCountry
 	{
 		set{
@@ -40,7 +47,7 @@ public class EarthManager : MonoBehaviour {
 	/// <summary>
 	/// Disables mesh renderer of previously selected Country.
 	/// </summary>
-	/// <returns>The country.</returns>
+	/// <returns>The Country.</returns>
 	private void HideCountry()
 	{
 		if(SelectedCountry)
@@ -54,9 +61,20 @@ public class EarthManager : MonoBehaviour {
 	/// <param name="value">If set to <c>true</c> value.</param>
 	public void MoveToWikiPosition(bool value)
 	{
+#if UNITY_WEBGL || UNITY_EDITOR
+		anim.enabled = false;
+		StopAllCoroutines();
+		if(value)
+			StartCoroutine(TranslateGlobe(wikiPos.transform.position));
+		else
+			StartCoroutine(TranslateGlobe(Vector3.zero));
+
+#else 
 		if (value)
 			anim.enabled = value;
+
 		anim.SetBool ("wikiPos", value);
+#endif
 
 	}
 
@@ -68,5 +86,19 @@ public class EarthManager : MonoBehaviour {
 		anim.enabled = false;
 	}
 
-
+	/// <summary>
+	/// Translates the globe to the destination.
+	/// </summary>
+	/// <returns>The globe.</returns>
+	/// <param name="destination">Destination.</param>
+	IEnumerator TranslateGlobe(Vector3 destination)
+	{
+		while (true) 
+		{
+			transform.position = Vector3.Lerp (transform.position, destination, 0.1f);
+			if (transform.position == destination)
+				break;
+			yield return null;
+		}
+	}
 }

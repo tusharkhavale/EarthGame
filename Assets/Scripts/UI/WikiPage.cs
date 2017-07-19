@@ -53,4 +53,5 @@ public class WikiPage : MonoBehaviour {
 	{
 		gameObject.SetActive (false);
 	}
+
 }

@@ -10,34 +10,22 @@ public class MainMenu : MonoBehaviour {
 	private Button btnSettings;
 	private Button btnHelp;
 	private Button btnExit;
-	private Animator anim;
 
 	void Start()
 	{
 		LoadReferences ();
 		AssignButtonDelegates ();
-		StartCoroutine (GetData ());
 	}
 
-	/// <summary>
-	/// Raises the enable event.
-	/// Play open animation 
-	/// </summary>
-	void OnEnable()
-	{
-		if(anim != null)
-			 anim.SetBool ("open", true);
-	}
 
 	/// <summary>
 	/// Loads the references.
 	/// </summary>
 	void LoadReferences()
 	{
-		anim = transform.GetComponent<Animator> ();
 		panel = transform.Find ("Panel");
-		btnNew = panel.Find ("New").GetComponent<Button> ();
-		btnSettings = panel.Find ("Settings").GetComponent<Button> ();
+		btnNew = panel.Find ("Play").GetComponent<Button> ();
+		btnSettings = panel.Find ("Explore").GetComponent<Button> ();
 		btnHelp = panel.Find ("Help").GetComponent<Button> ();
 		btnExit = panel.Find ("Exit").GetComponent<Button> ();
 	}
@@ -47,8 +35,8 @@ public class MainMenu : MonoBehaviour {
 	/// </summary>
 	void AssignButtonDelegates()
 	{
-		btnNew.onClick.AddListener (this.OnClickNew);
-		btnSettings.onClick.AddListener (this.OnClickSettings);
+		btnNew.onClick.AddListener (this.OnClickPlay);
+		btnSettings.onClick.AddListener (this.OnClickExplore);
 		btnHelp.onClick.AddListener (this.OnClickHelp);
 		btnExit.onClick.AddListener (this.OnClickExit);
 	}
@@ -56,14 +44,15 @@ public class MainMenu : MonoBehaviour {
 
 #region callback functions
 
-	public void OnClickNew()
+	public void OnClickPlay()
 	{
-		
+		GameController.controller.GameState = EGameState.Game;
 	}
 
-	public void OnClickSettings ()
+	public void OnClickExplore ()
 	{
-		
+		GameController.controller.GameState = EGameState.Globe;
+
 	}
 
 	public void OnClickHelp()
@@ -73,12 +62,6 @@ public class MainMenu : MonoBehaviour {
 
 	public void OnClickExit ()
 	{
-		anim.SetBool ("open", false);
-	}
-
-	public void OnLoad()
-	{
-		
 	}
 
 	public void OnExit()
@@ -86,29 +69,5 @@ public class MainMenu : MonoBehaviour {
 		gameObject.SetActive (false);
 	}
 
-
 #endregion
-
-
-
-	string url = "https://en.wikipedia.org/w/api.php";
-
-	IEnumerator GetData()
-	{
-		WWWForm form = new WWWForm ();
-		form.AddField ("action", "query");
-		form.AddField ("prop", "revisions");
-		form.AddField ("titles", "India");
-		form.AddField ("rvprop", "content");
-
-		WWW w = new WWW(url, form);
-		yield return w;
-		if (!string.IsNullOrEmpty(w.error)) {
-			print(w.error);
-		}
-		else {
-			print("Done : "+w.text);
-		}
-	}
-
 }
