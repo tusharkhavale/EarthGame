@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
 	public static GameController controller;
-	private EGameState gameState;
+	private EGameState gameState = EGameState.Globe;
 
 	[HideInInspector]
 	public UIManager uiManager;
@@ -21,6 +21,9 @@ public class GameController : MonoBehaviour {
 
 	[HideInInspector]
 	public InGameController ingameController;
+
+	[HideInInspector]
+	public GamePlay gameplay;
 
 	[HideInInspector]
 	public Parser parser;
@@ -75,5 +78,25 @@ public class GameController : MonoBehaviour {
 		return uiManager.Wikipedia;
 	}
 
+	public void HideSelectedCountry()
+	{
+		earthManager.HideCountry ();
+	}
 
+	public void SelectedCountry(GameObject go)
+	{
+		if (gameState == EGameState.Globe) 
+		{
+			earthManager.SelectedCountry = go;
+		}
+		else if (gameState == EGameState.Game) 
+		{
+			gameplay.SelectedCountry (go);
+		}
+	}
+
+	public void EnableStartButton(bool value)
+	{
+		ingameController.EnableStartButton (value);
+	}
 }

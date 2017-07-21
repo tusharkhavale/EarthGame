@@ -67,13 +67,17 @@ public class UIManager : MonoBehaviour {
 
 	private void HideWikiPanel()
 	{
+		GameController.controller.EnableStartButton (true);
 		wikiPanel.transform.GetComponent<WikiPage> ().ZoomOut (true);
 		GameController.controller.MoveEarthToWikiPosition (false);
 		Wikipedia = false;
+		header.SetActive (false);
+		GameController.controller.HideSelectedCountry ();
 	}
 
 	public void ShowWikiPanel()
 	{
+		GameController.controller.EnableStartButton (false);
 		Wikipedia = true;
 		wikiPanel.SetActive (true);
 		GameController.controller.MoveEarthToWikiPosition (true);

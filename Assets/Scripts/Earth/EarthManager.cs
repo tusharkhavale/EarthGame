@@ -39,6 +39,7 @@ public class EarthManager : MonoBehaviour {
 		set{
 				HideCountry ();
 				selectedCountry = value;
+				selectedCountry.transform.GetComponent<MeshRenderer> ().enabled = true;
 				GameController.controller.ShowCountryTitle ();
 		   }
 		get{ return selectedCountry; }
@@ -48,7 +49,7 @@ public class EarthManager : MonoBehaviour {
 	/// Disables mesh renderer of previously selected Country.
 	/// </summary>
 	/// <returns>The Country.</returns>
-	private void HideCountry()
+	public void HideCountry()
 	{
 		if(SelectedCountry)
 			SelectedCountry.transform.GetComponent<MeshRenderer> ().enabled = false;
@@ -62,12 +63,16 @@ public class EarthManager : MonoBehaviour {
 	public void MoveToWikiPosition(bool value)
 	{
 #if UNITY_WEBGL || UNITY_EDITOR
-		anim.enabled = false;
-		StopAllCoroutines();
-		if(value)
-			StartCoroutine(TranslateGlobe(wikiPos.transform.position));
-		else
-			StartCoroutine(TranslateGlobe(Vector3.zero));
+//		anim.enabled = false;
+//		StopAllCoroutines();
+//		if(value)
+//			StartCoroutine(TranslateGlobe(wikiPos.transform.position));
+//		else
+//			StartCoroutine(TranslateGlobe(Vector3.zero));
+		if (value)
+			anim.enabled = value;
+
+		anim.SetBool ("wikiPos", value);
 
 #else 
 		if (value)

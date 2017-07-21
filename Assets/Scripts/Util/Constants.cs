@@ -31,7 +31,6 @@ public enum ECountry
 
 public class Constants : MonoBehaviour {
 
-
 	public static List<ECountry> lvl1 = new List<ECountry> ();
 	public static List<ECountry> lvl2 = new List<ECountry> ();
 	public static List<ECountry> lvl3 = new List<ECountry> ();
@@ -42,9 +41,33 @@ public class Constants : MonoBehaviour {
 	public static List<ECountry> lvl8 = new List<ECountry> ();
 	public static List<ECountry> lvl9 = new List<ECountry> ();
 	public static List<ECountry> lvl10 = new List<ECountry> ();
+	public static Dictionary<int, List<ECountry>> dictCountryList = new Dictionary<int, List<ECountry>> ();
+	public static Dictionary<int, float> dictTimePerLevel = new Dictionary<int, float> ();
 
 	void Start()
 	{
+		dictCountryList.Add (1, lvl1);
+		dictCountryList.Add (2, lvl2);
+		dictCountryList.Add (3, lvl3);
+		dictCountryList.Add (4, lvl4);
+		dictCountryList.Add (5, lvl5);
+		dictCountryList.Add (6, lvl6);
+		dictCountryList.Add (7, lvl7);
+		dictCountryList.Add (8, lvl8);
+		dictCountryList.Add (9, lvl9);
+		dictCountryList.Add (10, lvl10);
+
+		dictTimePerLevel.Add (1, 60);
+		dictTimePerLevel.Add (2, 80);
+		dictTimePerLevel.Add (3, 100);
+		dictTimePerLevel.Add (4, 120);
+		dictTimePerLevel.Add (5, 130);
+		dictTimePerLevel.Add (6, 140);
+		dictTimePerLevel.Add (7, 150);
+		dictTimePerLevel.Add (8, 150);
+		dictTimePerLevel.Add (9, 150);
+		dictTimePerLevel.Add (10, 150);
+
 		lvl1.Add (ECountry.India);
 		lvl1.Add (ECountry.China);
 		lvl1.Add (ECountry.Russia);
@@ -53,6 +76,7 @@ public class Constants : MonoBehaviour {
 		lvl1.Add (ECountry.Australia);
 		lvl1.Add (ECountry.Antarctica);
 		lvl1.Add (ECountry.Brazil);
+
 
 		lvl2.Add (ECountry.Saudi_Arabia);
 		lvl2.Add (ECountry.Pakistan);
