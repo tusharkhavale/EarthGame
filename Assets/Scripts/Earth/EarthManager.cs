@@ -13,12 +13,6 @@ public class EarthManager : MonoBehaviour {
 	{
 		GameController.controller.earthManager = this;
 		LoadReferences ();
-		string dummy = "";
-		for (int i = 0; i < transform.Find("EarthCountries").childCount; i++) 
-		{
-			dummy = dummy + transform.Find("EarthCountries").GetChild(i).name+",";
-		}
-		Debug.Log ("" + dummy);
 	}
 
 	/// <summary>

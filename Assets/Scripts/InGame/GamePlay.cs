@@ -19,12 +19,12 @@ public class GamePlay : MonoBehaviour {
 	private Material green;
 	private EGameMode gameMode = EGameMode.PAUSED;
 	private GameObject preSelection;
+	private int level;
 
 	void Awake()
 	{
 		GameController.controller.gameplay = this;
 		ingameController = transform.GetComponent<InGameController> ();
-		ResetVariables ();
 	}
 
 	void Start()
@@ -45,11 +45,13 @@ public class GamePlay : MonoBehaviour {
 	/// <summary>
 	/// Resets all variables.
 	/// </summary>
-	private void ResetVariables()
+	public void ResetVariables()
 	{
 		player = null;
 		player = new Player ();
 		ClearUsedIndexes ();
+		lstCurrCountry = GetCountryList ();
+		level = GetLevel();
 	}
 
 	/// <summary>
@@ -69,13 +71,18 @@ public class GamePlay : MonoBehaviour {
 		int index = 0;
 		bool isValidIndex = false;
 
-		// Get country list based on the player's level
-		lstCurrCountry = GetCountryList ();
+		// Update country list if level has changed
+		if (level != GetLevel ()) 
+		{
+			level = GetLevel ();
+			ClearUsedIndexes();
+			lstCurrCountry = GetCountryList ();
+		}
 
 		// Clear used indexes list if all indexes are exhausted
-		if (lstCurrCountry.Count == lstUsedIndexes.Count) 
+		if (lstCurrCountry.Count <= lstUsedIndexes.Count) 
 		{
-			lstUsedIndexes.Clear();
+			ClearUsedIndexes();
 		}
 
 		// select random index of the countries list
@@ -170,7 +177,7 @@ public class GamePlay : MonoBehaviour {
 	/// <returns>The level.</returns>
 	private int GetLevel()
 	{
-		for (int i = 1; i <= 11; i++) 
+		for (int i = 2; i <= 11; i++) 
 		{
 			if (player.level < i )
 				return i-1;

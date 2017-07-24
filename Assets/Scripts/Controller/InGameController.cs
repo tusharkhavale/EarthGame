@@ -56,6 +56,7 @@ public class InGameController : MonoBehaviour {
 	private void OnClickStart()
 	{
 		GameController.controller.GameState = EGameState.Game;
+		GameController.controller.HideCountryTitle ();
 		ShowInfoPopup ();
 		btnStart.gameObject.SetActive (false);
 	}
@@ -63,6 +64,7 @@ public class InGameController : MonoBehaviour {
 	private void OnClickPlay()
 	{
 		infoPopup.SetActive (false);
+		gameplay.ResetVariables ();
 		gameplay.SelectCountry ();
 	}
 

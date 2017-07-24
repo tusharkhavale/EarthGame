@@ -114,7 +114,6 @@ public class Constants : MonoBehaviour {
 		lvl5.Add (ECountry.Papua_New_Guinea);
 		lvl5.Add (ECountry.Egypt);
 		lvl5.Add (ECountry.Namibia);
-		lvl5.Add (ECountry.Madagascar);
 		lvl5.Add (ECountry.Swedan);
 
 		lvl6.Add (ECountry.Central_African_Republic);
@@ -184,7 +183,6 @@ public class Constants : MonoBehaviour {
 		lvl10.Add (ECountry.Austria);
 		lvl10.Add (ECountry.Croatia);
 		lvl10.Add (ECountry.Bosnia_and_Herzegovina);
-
 
 	}
 }

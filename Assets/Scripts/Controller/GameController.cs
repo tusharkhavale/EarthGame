@@ -83,6 +83,11 @@ public class GameController : MonoBehaviour {
 		earthManager.HideCountry ();
 	}
 
+	public void HideCountryTitle()
+	{
+		uiManager.HideCountryTitle ();
+	}
+
 	public void SelectedCountry(GameObject go)
 	{
 		if (gameState == EGameState.Globe) 

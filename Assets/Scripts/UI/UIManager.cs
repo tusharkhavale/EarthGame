@@ -89,6 +89,11 @@ public class UIManager : MonoBehaviour {
 		wikiPanel.transform.GetComponent<WikiPage> ().Content = text;
 	}
 
+	public void HideCountryTitle()
+	{
+		header.SetActive(false);
+	}
+
 	public void ShowCountryTitle()
 	{
 		header.SetActive(true);
