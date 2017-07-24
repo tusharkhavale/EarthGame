@@ -57,16 +57,16 @@ public class Constants : MonoBehaviour {
 		dictCountryList.Add (9, lvl9);
 		dictCountryList.Add (10, lvl10);
 
-		dictTimePerLevel.Add (1, 60);
-		dictTimePerLevel.Add (2, 80);
-		dictTimePerLevel.Add (3, 100);
-		dictTimePerLevel.Add (4, 120);
-		dictTimePerLevel.Add (5, 130);
-		dictTimePerLevel.Add (6, 140);
-		dictTimePerLevel.Add (7, 150);
-		dictTimePerLevel.Add (8, 150);
-		dictTimePerLevel.Add (9, 150);
-		dictTimePerLevel.Add (10, 150);
+		dictTimePerLevel.Add (1, 30);
+		dictTimePerLevel.Add (2, 40);
+		dictTimePerLevel.Add (3, 60);
+		dictTimePerLevel.Add (4, 80);
+		dictTimePerLevel.Add (5, 100);
+		dictTimePerLevel.Add (6, 100);
+		dictTimePerLevel.Add (7, 100);
+		dictTimePerLevel.Add (8, 100);
+		dictTimePerLevel.Add (9, 100);
+		dictTimePerLevel.Add (10, 100);
 
 		lvl1.Add (ECountry.India);
 		lvl1.Add (ECountry.China);

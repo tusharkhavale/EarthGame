@@ -6,6 +6,5 @@ public class OverlayUI : MonoBehaviour {
 
 	void Awake()
 	{
-		GameController.controller.AssignOverlayUIReference (this);
 	}
 }

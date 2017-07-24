@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour {
 
-	private OverlayUI overlayUI;
+	private InGameController inGameController;
 	private GameObject wikiPanel;
 	private GameObject header;
 	private Button btnInfo;
@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour {
 	void LoadReferences()
 	{
 		wikiPanel = transform.Find ("WikiPage").gameObject;
-		header = transform.Find ("Header").gameObject;
+		header = GameController.controller.ingameController.transform.Find ("Header").gameObject;
 		btnInfo = header.transform.GetComponentInChildren<Button> ();
 		btnInfo.onClick.AddListener (this.ShowWikiPanel);
 		btnClose = wikiPanel.transform.Find("Bg").GetComponentInChildren<Button> ();
@@ -44,15 +44,6 @@ public class UIManager : MonoBehaviour {
 	{
 		get{return wikipedia;}
 		set{wikipedia = value;}
-	}
-
-	/// <summary>
-	/// Assigns the overlay user interface refrence.
-	/// </summary>
-	/// <param name="overlayUI">Overlay U.</param>
-	public void AssignOverlayUIRefrence(OverlayUI overlayUI)
-	{
-		this.overlayUI = overlayUI;
 	}
 
 	void AddEscDelegate()

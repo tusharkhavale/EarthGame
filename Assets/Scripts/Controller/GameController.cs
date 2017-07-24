@@ -68,11 +68,6 @@ public class GameController : MonoBehaviour {
 		uiManager.AssignWikiText (text);
 	}
 
-	public void AssignOverlayUIReference(OverlayUI overlayUI)
-	{
-		uiManager.AssignOverlayUIRefrence(overlayUI);
-	}
-
 	public bool WikipediaStatus()
 	{
 		return uiManager.Wikipedia;
