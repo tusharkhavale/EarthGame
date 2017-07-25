@@ -78,6 +78,11 @@ public class GameController : MonoBehaviour {
 		earthManager.HideCountry ();
 	}
 
+	public void ToggleEarthType()
+	{
+		earthManager.ToggleEarthType ();
+	}
+
 	public void HideCountryTitle()
 	{
 		uiManager.HideCountryTitle ();

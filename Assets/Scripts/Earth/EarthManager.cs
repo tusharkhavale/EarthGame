@@ -5,6 +5,8 @@ using UnityEngine;
 public class EarthManager : MonoBehaviour {
 
 	private Transform earth;
+	private Transform earthWater;
+	private Transform earthBoundries;
 	private GameObject selectedCountry;
 	private Animator anim;
 	public GameObject wikiPos;
@@ -21,6 +23,8 @@ public class EarthManager : MonoBehaviour {
 	private void LoadReferences()
 	{
 		earth = transform.Find ("EarthCountries");
+		earthWater = transform.Find ("EarthWater");
+		earthBoundries = transform.Find ("EarthBoundries");
 		anim = transform.GetComponent<Animator> ();
 	}
 
@@ -33,7 +37,7 @@ public class EarthManager : MonoBehaviour {
 		set{
 				HideCountry ();
 				selectedCountry = value;
-				selectedCountry.transform.GetComponent<MeshRenderer> ().enabled = true;
+				selectedCountry.transform.GetComponent<MeshRenderer> ().enabled = true;			
 				GameController.controller.ShowCountryTitle ();
 		   }
 		get{ return selectedCountry; }
@@ -48,6 +52,15 @@ public class EarthManager : MonoBehaviour {
 		if(SelectedCountry)
 			SelectedCountry.transform.GetComponent<MeshRenderer> ().enabled = false;
 		
+	}
+
+	/// <summary>
+	/// Toggles the type of the earth re	/// </summary>
+	public void ToggleEarthType()
+	{
+		bool isActive = earthWater.gameObject.activeInHierarchy;
+		earthWater.gameObject.SetActive (earthBoundries.gameObject.activeInHierarchy);
+		earthBoundries.gameObject.SetActive (isActive);
 	}
 
 	/// <summary>

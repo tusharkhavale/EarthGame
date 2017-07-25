@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour {
 	private Button btnInfo;
 	private Button btnClose;
 	private bool wikipedia;
+	private Button btnToggleEarth; 
 
 	void Awake()
 	{
@@ -30,10 +31,17 @@ public class UIManager : MonoBehaviour {
 	{
 		wikiPanel = transform.Find ("WikiPage").gameObject;
 		header = GameController.controller.ingameController.transform.Find ("Header").gameObject;
+		btnToggleEarth = GameController.controller.ingameController.transform.Find ("ToggleEarth").GetComponent<Button>();
+		btnToggleEarth.onClick.AddListener (this.ToggleEarthType);
 		btnInfo = header.transform.GetComponentInChildren<Button> ();
 		btnInfo.onClick.AddListener (this.ShowWikiPanel);
 		btnClose = wikiPanel.transform.Find("Bg").GetComponentInChildren<Button> ();
 		btnClose.onClick.AddListener (this.HideWikiPanel);
+	}
+
+	public void ToggleEarthType()
+	{
+		GameController.controller.ToggleEarthType ();
 	}
 
 	/// <summary>
