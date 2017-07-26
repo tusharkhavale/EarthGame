@@ -100,6 +100,7 @@ public class GamePlay : MonoBehaviour {
 		ingameController.SetTimeBar (1.0f);
 		ingameController.ShowTask (lstCurrCountry[index]);
 		ingameController.SetLevelDisplay (GetLevel ());
+		ingameController.SetScoreDisplay (player.score);
 		StartTimer ();
 	}
 
@@ -109,7 +110,7 @@ public class GamePlay : MonoBehaviour {
 	/// </summary>
 	private void StartTimer()
 	{
-		player.time += Constants.dictTimePerLevel [GetLevel()];
+		player.time = Constants.dictTimePerLevel [GetLevel()];
 
 		StopAllCoroutines ();
 		StartCoroutine (RunTimer());
@@ -217,7 +218,15 @@ public class GamePlay : MonoBehaviour {
 		// STops timer
 		StopAllCoroutines ();
 		IncrementLevel ();
+		CalculateScore ();
 		ingameController.ShowCorrectSelectionPop();
+
+	}
+
+	private void CalculateScore()
+	{
+		player.score += (int)(player.time * 100);
+		ingameController.SetScoreDisplay (player.score);
 	}
 
 	/// <summary>
