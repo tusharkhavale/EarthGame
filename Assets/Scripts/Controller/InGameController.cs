@@ -139,6 +139,9 @@ public class InGameController : MonoBehaviour {
 
 	public void SetTimeDisplay(int i)
 	{
+		if (i < 0)
+			i = 0;
+		
 		timeIndicator.SetActive (true);
 		timeIndicatorText.text = "" + i;
 	}
