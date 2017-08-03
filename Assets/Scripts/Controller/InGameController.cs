@@ -15,8 +15,10 @@ public class InGameController : MonoBehaviour {
 	private GameObject gameOverPopup;
 	private GameObject levelIndicator;
 	private GameObject scoreIndicator;
+	private GameObject timeIndicator;
 	private Text levelIndicatorText;
 	private Text scoreIndicatorText;
+	private Text timeIndicatorText;
 	private GamePlay gameplay;
 	private Slider timebar;
 
@@ -41,6 +43,8 @@ public class InGameController : MonoBehaviour {
 		levelIndicatorText = levelIndicator.transform.Find ("Number").GetComponent<Text> ();
 		scoreIndicator = transform.Find ("Score").gameObject;
 		scoreIndicatorText = scoreIndicator.transform.Find ("Number").GetComponent<Text> ();
+		timeIndicator = transform.Find ("Time").gameObject;
+		timeIndicatorText = timeIndicator.transform.Find ("Number").GetComponent<Text> ();
 		timebar = taskPanel.transform.GetComponentInChildren<Slider> ();
 		correctSelectionPopup = transform.Find ("CorrectSelection").gameObject;
 		btnPlay = infoPopup.transform.GetComponentInChildren<Button> ();
@@ -83,6 +87,7 @@ public class InGameController : MonoBehaviour {
 		gameOverPopup.SetActive (false);
 		levelIndicator.SetActive (false);
 		scoreIndicator.SetActive (false);
+		timeIndicator.SetActive (false);
 		GameController.controller.GameState = EGameState.Globe;
 		btnStart.gameObject.SetActive (true);
 	}
@@ -130,5 +135,11 @@ public class InGameController : MonoBehaviour {
 	{
 		scoreIndicator.SetActive (true);
 		scoreIndicatorText.text = "" + i;
+	}
+
+	public void SetTimeDisplay(int i)
+	{
+		timeIndicator.SetActive (true);
+		timeIndicatorText.text = "" + i;
 	}
 }

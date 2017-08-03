@@ -129,6 +129,7 @@ public class GamePlay : MonoBehaviour {
 		{
 			player.time -= Time.deltaTime;
 			ingameController.SetTimeBar (player.time/totalTime);
+			ingameController.SetTimeDisplay ((int)(player.time / 1));
 			if (player.time <= 0) 
 			{
 				GameOver ();

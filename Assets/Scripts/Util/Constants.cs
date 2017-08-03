@@ -10,7 +10,7 @@ public enum EGameState
 
 public enum ECountry
 {
-	Abhaziya,Afghanistan,Albania,Algeria,America,Angola,Antarctica,Argentina,Armenia,Australia,
+	Abhaziya,Afghanistan,Albania,Algeria,USA,Angola,Antarctica,Argentina,Armenia,Australia,
 	Austria,Azerbaijan,Bagamy,Bangladesh,Barbados,Belarus,Belgium,Belize,Benin,Bulgaria,Bolivia,
 	Bosnia_and_Herzegovina,Botswana,Brazil,Britan,Brunei,Burundi,Burkina_Faso,Bhutan,Cameroon,
 	Canada,Central_African_Republic,Chad,Czechia,Chernogoriya,Chile,Colombia,Greenland,DemocrRespKongo,
@@ -71,7 +71,7 @@ public class Constants : MonoBehaviour {
 		lvl1.Add (ECountry.India);
 		lvl1.Add (ECountry.China);
 		lvl1.Add (ECountry.Russia);
-		lvl1.Add (ECountry.America);
+		lvl1.Add (ECountry.USA);
 		lvl1.Add (ECountry.Canada);
 		lvl1.Add (ECountry.Australia);
 		lvl1.Add (ECountry.Antarctica);
